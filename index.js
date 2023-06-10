@@ -18,8 +18,10 @@ app.use(express.json())
 
 /**Routes  */
 const userRouter = require('./router/auth')
-
+const adminRouter = require('./router/adminTalks')
 app.use('/api/user/',userRouter)
+app.use('/api/admin/',adminRouter)
+
 
 //
 const startServer = async () =>{
@@ -31,7 +33,7 @@ const startServer = async () =>{
             console.log("Server is running on port ",PORT)
         })
 
-        const io = socketio(server)
+        global.io = socketio(server)
 
         io.on('connection', (socket) => {
             console.log('New connection')
