@@ -37,10 +37,10 @@ const startServer = async () =>{
 
         io.on('connection', (socket) => {
             console.log('New connection')
-
+            
             socket.on('message', (message) => {
                 console.log('New connection',message)
-                io.emit(message)
+                
             })
         })
     }else{
