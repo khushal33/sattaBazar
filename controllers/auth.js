@@ -73,8 +73,9 @@ const signIn = (req,res) =>{
             var refreshToken = jwt.sign({ id: user.id ,email:email}, config.REFRESH_TOKEN_SECRET, {
                 expiresIn: 86400 // 24 hours
                 });
-                user.token = token
-            resolve({status:true,message:user,token:token,refreshToken})
+                let msg = JSON.parse(JSON.stringify(user))
+                msg.token = token
+            resolve({status:true,message:msg,token:token,refreshToken})
            }else{
             reject({status:false,message:"Incorrect username or password"})
            }
