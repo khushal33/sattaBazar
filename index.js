@@ -42,7 +42,28 @@ const startServer = async () =>{
                 console.log('New connection',message)
                 
             })
+
+
+            socket.on('start', (res) => {
+                console.log("start",res);
+                io.emit("startTrigger",res)
+                
+            })
+    
+            socket.on('stop', (res) => {
+                console.log("stop",res);
+                io.emit("stopTrigger",res)
+                
+            })
+    
+            socket.on('reload', (res) => {
+                io.emit("reloadTrigger",res)
+                
+            })
         })
+
+        
+
     }else{
         let options = {
             key: fs.readFileSync(path.resolve(__dirname,'./configs/SSL/private.key')),
