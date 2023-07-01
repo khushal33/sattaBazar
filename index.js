@@ -8,6 +8,8 @@ require('dotenv').config();
 const { connect } = require('mongoose');
 const socketio = require('socket.io');
 
+const {updateGameData} = require('./controllers/gameData')
+
 
 global.env  = process.env.NODE_ENV
 const {dataBase: { dbConnectionString }} = require('./config').config[env]
@@ -19,13 +21,13 @@ app.use(express.json())
 /**Routes  */
 const userRouter = require('./router/auth')
 const adminRouter = require('./router/adminTalks')
+const gameRouter = require('./router/gameData')
 app.use('/api/user/',userRouter)
 app.use('/api/admin/',adminRouter)
-
+app.use('/api/game/',gameRouter)
 
 //
 const startServer = async () =>{
-
     /** Node server  */
     let PORT = process.env.PORT
     if(process.env.NODE_ENV == 'LOCAL'){
@@ -44,21 +46,34 @@ const startServer = async () =>{
             })
 
 
-            socket.on('start', (res) => {
-                console.log("start",res);
-                io.emit("startTrigger",res)
-                
+            socket.on('start',async (res) => {
+                try{
+                    let req = {
+                        gameStatus : 'start',
+                        natepute : {},
+                        akluj : {}
+                    }
+                    await updateGameData({body:req},{})
+                    console.log("start",res);
+                    io.emit("startTrigger",res)
+                }catch(err){
+                    console.log("error",err.message);
+                } 
             })
     
-            socket.on('stop', (res) => {
-                console.log("stop",res);
-                io.emit("stopTrigger",res)
-                
+            socket.on('stop',async (res) => {
+                try{
+                    let req = {
+                        gameStatus : 'stop'
+                    }
+                    await updateGameData({body:req},{})
+                    io.emit("stopTrigger",res)  
+                }catch(err){
+                    console.log("error",err.message);
+                }
             })
-    
             socket.on('reload', (res) => {
                 io.emit("reloadTrigger",res)
-                
             })
         })
 

@@ -1,4 +1,3 @@
-const { use } = require('..')
 const User = require('../models/user')
 var jwt = require("jsonwebtoken");
 const config = require('../config').config[env]
