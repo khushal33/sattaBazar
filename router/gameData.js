@@ -11,7 +11,7 @@ router.get('/',verifyToken,async (req,res)=>{
         })
 })
 
-router.get('/',verifyToken,async (req,res)=>{
+router.get('/admin',verifyToken,async (req,res)=>{
     getAdminGameData(req,res).then((data)=>{
         res.status(200).send(data)
         }).catch((err)=>{
