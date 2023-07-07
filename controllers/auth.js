@@ -44,13 +44,13 @@ const verifyAdmin = (req, res, next) => {
 
 const signUp = (req,res) =>{
     return new Promise(async (resolve,reject)=>{
-        const {email,password,name,role} = req.body
+        const {email,password,name,role,branchName} = req.body
         let userExistOrNot = await checkUserExistOrNot(email)
         if(userExistOrNot.status == false){
             reject(userExistOrNot)
         }else{
             let new_user = new User({
-                email,name,role
+                email,name,role,branchName
             })
             new_user.password = new_user.generateHash(password);
             let done = await new_user.save()
