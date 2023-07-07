@@ -7,6 +7,7 @@ const https = require('https')
 require('dotenv').config();
 const { connect } = require('mongoose');
 const socketio = require('socket.io');
+const GameData = require('./models/gameData')
 
 const {updateGameData} = require('./controllers/gameData')
 
@@ -50,10 +51,32 @@ const startServer = async () =>{
                 try{
                     let req = {
                         gameStatus : 'start',
-                        natepute : {},
-                        akluj : {}
+                        natepute : {
+                            zero:0,
+                            one:0,
+                            two:0,
+                            three:0,
+                            four:0,
+                            five:0,
+                            six:0,
+                            seven:0,
+                            eight:0,
+                            nine:0,
+                        },
+                        akluj : {
+                            zero:0,
+                            one:0,
+                            two:0,
+                            three:0,
+                            four:0,
+                            five:0,
+                            six:0,
+                            seven:0,
+                            eight:0,
+                            nine:0,
+                        }
                     }
-                    await updateGameData({body:req},{})
+                    await GameData.updateMany({},req)
                     console.log("start",res);
                     io.emit("startTrigger",res)
                 }catch(err){
