@@ -95,8 +95,16 @@ const startServer = async () =>{
                     console.log("error",err.message);
                 }
             })
-            socket.on('reload', (res) => {
-                io.emit("reloadTrigger",res)
+            socket.on('reload', async (res) => {
+                try{
+                    let req = {
+                        gameStatus : 'reload'
+                    }
+                    await updateGameData({body:req},{})
+                    io.emit("reloadTrigger",res)
+                }catch(err){
+                    console.log("error",err.message);
+                }
             })
         })
 

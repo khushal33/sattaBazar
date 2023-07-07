@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema({
-    gameStatus:{type:String,enum:["start","stop"],default:"stop"},
+    gameStatus:{type:String,enum:["start","stop","reload"],default:"stop"},
     gameResult:{type:Number,default:0},
     natepute:{
         zero:{type:Number,default:0},
