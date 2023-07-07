@@ -58,6 +58,7 @@ const updateGameData = (req,res) =>{
             }
             if(natepute){
                 finalObj.natepute = {
+                    zero : natepute.zero ? (natepute.zero + data.natepute.zero) : data.natepute.zero,
                     one : natepute.one ? (natepute.one + data.natepute.one) : data.natepute.one,
                     two : natepute.two ? (natepute.two + data.natepute.two) : data.natepute.two,
                     three : natepute.three ? (natepute.three + data.natepute.three) : data.natepute.three,
@@ -72,6 +73,7 @@ const updateGameData = (req,res) =>{
             }
             if(akluj){
                 finalObj.akluj = {
+                    zero : akluj.zero ? (akluj.zero + data.akluj.zero) : data.akluj.zero,
                     one : akluj.one ? (akluj.one + data.akluj.one) : data.akluj.one,
                     two : akluj.two ? (akluj.two + data.akluj.two) : data.akluj.two,
                     three : akluj.three ? (akluj.three + data.akluj.three) : data.akluj.three,

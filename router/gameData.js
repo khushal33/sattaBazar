@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const {verifyToken} = require('../controllers/auth')
+const {verifyToken, verifyAdmin} = require('../controllers/auth')
 const {postGameData,updateGameData,getGameData,getAdminGameData} = require('../controllers/gameData')
 
-router.get('/',verifyToken,async (req,res)=>{
+router.get('/',async (req,res)=>{
     getGameData(req,res).then((data)=>{
         res.status(200).send(data)
         }).catch((err)=>{
@@ -11,7 +11,7 @@ router.get('/',verifyToken,async (req,res)=>{
         })
 })
 
-router.get('/admin',verifyToken,async (req,res)=>{
+router.get('/admin',verifyAdmin,async (req,res)=>{
     getAdminGameData(req,res).then((data)=>{
         res.status(200).send(data)
         }).catch((err)=>{
