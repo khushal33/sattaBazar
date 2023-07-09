@@ -79,6 +79,8 @@ const startServer = async () =>{
                     await GameData.updateMany({},req)
                     console.log("start",res);
                     io.emit("startTrigger",res)
+                    let adminres = await getAdminGameData({},{})
+                    io.emit("admin",adminres)
                 }catch(err){
                     console.log("error",err.message);
                 } 
