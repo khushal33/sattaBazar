@@ -9,7 +9,7 @@ const { connect } = require('mongoose');
 const socketio = require('socket.io');
 const GameData = require('./models/gameData')
 
-const {updateGameData} = require('./controllers/gameData')
+const {updateGameData,getAdminGameData} = require('./controllers/gameData')
 
 
 global.env  = process.env.NODE_ENV
